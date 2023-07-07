@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: azure;
+}
+
+td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+table {
+    border: none;
+}
+
+td:has(table) {
+    border: none;
+}
+
+td:has(input) {
+    border: none;
+}
+
+input {
+    border: 1px solid blue;
+}
+th {
+    border: none;
+}
