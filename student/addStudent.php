@@ -10,8 +10,18 @@
 
 <body>
     <?php
-    include_once '../nav.php'
-        ?>
+    include_once '../nav.php';
+    session_start();
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['adminName'])) {
+        // Redirect the user to the login page if not logged in
+        header("Location: /unauthorized.php");
+        exit;
+    }
+
+
+    ?>
     <div style="max-width: 500px;margin: 0 auto;">
         <h2 class="form-title">Enter student details</h2>
         <?php
