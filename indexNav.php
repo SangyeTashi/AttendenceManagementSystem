@@ -38,7 +38,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 width="40" height="40" alt="">
         </a>
 
-        <button type='button' class=" btn btn-light">
-            <a class="link-dark link-underline-opacity-0" href="/login.php">Login</a></button>
+        <div>
+            <button type='button' class=" btn btn-light">
+                <a class="link-dark link-underline-opacity-0" href="/login.php">Login</a>
+            </button>
+            <button type='button' class=" btn btn-light">
+                <a class="link-dark link-underline-opacity-0" href="/staffLogin.php">Login as Staff</a>
+            </button>
+        </div>
     </div>
 </nav>

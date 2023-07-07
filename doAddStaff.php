@@ -1,30 +1,29 @@
 <?php
 // Retrieve form data
-$rollNo = $_POST['rollNo'];
+$staffId = $_POST['staffId'];
 $department = $_POST['department'];
-$semester = $_POST['semester'];
 $name = $_POST['name'];
 $password = $_POST['password'];
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-require_once '../db_connnect.php';
+require_once './db_connnect.php';
 // Prepare the SQL statement
-$sql = "insert into students values($rollNo, '$department', $semester, '$name','$hashedPassword' )";
+$sql = "insert into staffs values($staffId, '$name','$hashedPassword','$department' )";
 
 
-// Check if RollNo already exists
-$checkQuery = "select roll_no FROM students WHERE roll_no = '$rollNo'";
+// Check if staffId already exists
+$checkQuery = "select id FROM staffs WHERE id = '$staffId'";
 $result = mysqli_query($connection, $checkQuery);
 
 
 if (mysqli_num_rows($result) > 0) {
-    // RollNo already exists
-    header("Location: addStudent.php?msg=3");
+    // staffId already exists
+    header("Location: addStaff.php?msg=3");
 
 } else {
 
     if (mysqli_query($connection, $sql)) {
-        header("Location: addStudent.php?msg=1");
+        header("Location: addStaff.php?msg=1");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($connection);
     }

@@ -24,18 +24,18 @@
             echo '<p class="form-description text-danger">staff Id already exists in the database. Please try a different staff Id</p>';
         }
         ?>
-        <form style="margin-top:2rem" class="form" action="./postStaff.php" method="POST">
+        <form style="margin-top:2rem" class="form" action="./doAddStaff.php" method="POST">
             <div>
                 <label class="form-label" for="staffId">Staff Id</label>
                 <input class="form-control" type="number" name="staffId" id="staffId" required>
             </div>
             <div>
-                <label class="form-label" for="password">Password:</label>
-                <input class="form-control" type="password" name="password" id="password" required>
+                <label class="form-label" for="staffName">Staff Name </label>
+                <input class="form-control" type="text" name="name" id="name" required>
             </div>
             <div>
-                <label class="form-label" for="staffName">Staff Name </label>
-                <input class="form-control" type="text" name="staffName" id="staffName" required>
+                <label class="form-label" for="password">Password:</label>
+                <input class="form-control" type="password" name="password" id="password" required>
             </div>
             <div>
                 <label class="form-label" for="department">Department</label>
@@ -46,13 +46,6 @@
                     <option value="TIB">TIB</option>
                 </select>
             </div>
-
-            <div>
-                <label class="form-label" for="semester">Semester:</label>
-                <input class="form-control" type="number" name="semester" id="semester" required>
-            </div>
-
-
             <input class="form-control btn btn-primary mt-3" type="submit" value="Add staff">
         </form>
     </div>

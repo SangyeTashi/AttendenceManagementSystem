@@ -24,7 +24,7 @@
             echo '<p class="form-description text-danger">Subject Id already exists in the database. Please try a different Subject Id</p>';
         }
         ?>
-        <form style="margin-top:2rem" class="form" action="./postSubject.php" method="POST">
+        <form style="margin-top:2rem" class="form" action="./doAddSubject.php" method="POST">
             <div>
                 <label class="form-label" for="subjectId">Subject Id</label>
                 <input class="form-control" type="number" name="subjectId" id="subjectId" required>

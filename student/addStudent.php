@@ -32,6 +32,10 @@
                 <input class="form-control" type="text" name="name" id="name" required>
             </div>
             <div>
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" required>
+            </div>
+            <div>
                 <label class="form-label" for="department">Department</label>
                 <select class="form-select" required name="department">
                     <option value="BCA">BCA</option>

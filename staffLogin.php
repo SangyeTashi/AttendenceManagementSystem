@@ -13,11 +13,11 @@
         src="/img/dlihe_logo.png" alt="">
 
     <div style="max-width: 500px;margin: 0 auto;" class="d-flex flex-column align-items-center">
-        <h2 class='form-title'>Student Login</h2>
-        <form style="margin-top:2rem" class="form" action="./doStudentLogin.php" method="POST">
+        <h2 class='form-title'>Staff Login</h2>
+        <form style="margin-top:2rem" class="form" action="./doStaffLogin.php" method="POST">
             <div>
-                <label class="form-label" for="studentId">Student Id</label>
-                <input class="form-control" type="number" name="studentId" id="studentId" required>
+                <label class="form-label" for="staffId">Staff Id</label>
+                <input class="form-control" type="number" name="staffId" id="staffId" required>
             </div>
             <div>
                 <label class="form-label" for="password">Password:</label>
