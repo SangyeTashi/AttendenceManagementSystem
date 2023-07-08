@@ -19,14 +19,20 @@ $username = $_SESSION['adminName'];
     <title>
         <?php echo "$username" ?>
     </title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
 </head>
 
 <body>
     <?php include 'nav.php' ?>
-    <h2>Welcome,
-        <?php echo $_SESSION['adminName']; ?>!
-    </h2>
-    <a href="logout.php">Logout</a>
+    <div class="" style="margin-top: calc(74+8rem);">
+        <h2>Welcome,
+            <?php echo $_SESSION['adminName']; ?>!
+        </h2>
+        <a href="logout.php">Logout</a>
+    </div>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

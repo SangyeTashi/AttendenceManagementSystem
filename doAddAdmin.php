@@ -1,6 +1,17 @@
 <?php
 session_start();
 
+// Check if the user is logged in
+if (!isset($_SESSION['adminName'])) {
+    // Redirect the user to the login page if not logged in
+    header("Location: /unauthorized.php");
+    exit;
+}
+
+?>
+<?php
+session_start();
+
 // Retrieve form data
 $username = $_POST['username'];
 $password = $_POST['password'];

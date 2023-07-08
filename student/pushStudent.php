@@ -1,4 +1,15 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['adminName'])) {
+    // Redirect the user to the login page if not logged in
+    header("Location: /unauthorized.php");
+    exit;
+}
+
+?>
+<?php
 // Retrieve form data
 $rollNo = $_POST['rollNo'];
 $department = $_POST['department'];
