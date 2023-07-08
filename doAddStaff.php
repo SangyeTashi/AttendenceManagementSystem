@@ -13,7 +13,7 @@ if (!isset($_SESSION['adminName'])) {
 // Retrieve form data
 $staffId = $_POST['staffId'];
 $department = $_POST['department'];
-$name = $_POST['name'];
+$name = ucwords($_POST['name']);
 $password = $_POST['password'];
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 

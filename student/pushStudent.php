@@ -14,7 +14,7 @@ if (!isset($_SESSION['adminName'])) {
 $rollNo = $_POST['rollNo'];
 $department = $_POST['department'];
 $semester = $_POST['semester'];
-$name = $_POST['name'];
+$name = ucwords($_POST['name']);
 $password = $_POST['password'];
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 

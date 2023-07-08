@@ -19,13 +19,23 @@ $department = $_SESSION['department'];
     <title>
         <?php echo "$name | $department" ?>
     </title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <style>
+        .staff-profile {}
+    </style>
 </head>
 
 <body>
-    <h2>Welcome,
-        <?php echo $_SESSION['name']; ?>!
-    </h2>
-    <a href="logout.php">Logout</a>
+    <?php include './staffNav.php' ?>
+    <div class="staff-profile">
+        <h2>Welcome,
+            <?php echo $_SESSION['name']; ?>!
+        </h2>
+        <a href="logout.php">Logout</a>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+    </div>
+
 </body>
 
 </html>

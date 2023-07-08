@@ -24,7 +24,7 @@ $username = $_SESSION['adminName'];
 </head>
 
 <body>
-    <?php include 'nav.php' ?>
+    <?php include 'adminNav.php' ?>
     <div class="" style="margin-top: calc(74+8rem);">
         <h2>Welcome,
             <?php echo $_SESSION['adminName']; ?>!

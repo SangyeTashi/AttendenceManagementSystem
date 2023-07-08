@@ -22,6 +22,7 @@ if (!isset($_SESSION['adminName'])) {
 <body>
 
 
+    <?php include '../adminNav.php' ?>
     <div style="max-width: 500px;margin: 0 auto;">
         <h2 class="form-title">Enter student details</h2>
         <?php

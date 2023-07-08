@@ -21,7 +21,7 @@ if (!isset($_SESSION['adminName'])) {
 
 <body>
     <?php
-    include_once './nav.php'
+    include_once './adminNav.php'
         ?>
 
 

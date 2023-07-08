@@ -10,6 +10,7 @@
 <body>
     <h3>Error : unauthorized !</h3>
     <div>Login As <a href='adminLogin.php'>Admin </a></div>
+    <div><a href="index.php">Go to Home Page</a></div>
 </body>
 
 </html>
