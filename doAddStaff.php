@@ -17,7 +17,7 @@ $name = ucwords($_POST['name']);
 $password = $_POST['password'];
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-require_once './db_connnect.php';
+require_once './db_connect.php';
 // Prepare the SQL statement
 $sql = "insert into staffs values($staffId, '$name','$hashedPassword','$department' )";
 

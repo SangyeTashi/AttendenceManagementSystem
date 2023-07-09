@@ -3,7 +3,7 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'db_connnect.php';
+    include 'db_connect.php';
 
     // Get the submitted studentId and password
     $studentId = $_POST["studentId"];

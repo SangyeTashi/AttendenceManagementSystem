@@ -18,13 +18,13 @@ $subjectName = $_POST['subjectName'];
 $teacherId = $_POST['teacherId'];
 
 
-require_once './db_connnect.php';
+require_once './db_connect.php';
 // Prepare the SQL statement
 $sql = "insert into subjects values($subjectId,'$subjectName','$teacherId','$department', $semester)";
 
 
 // Check if subjectId already exists
-$checkQuery = "select subject_id FROM subjects WHERE subject_id='$subjectId'";
+$checkQuery = "select id FROM subjects WHERE id='$subjectId'";
 $result = mysqli_query($connection, $checkQuery);
 
 

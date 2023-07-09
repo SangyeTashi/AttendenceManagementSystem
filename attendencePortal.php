@@ -11,7 +11,7 @@
 <body>
     <?php
     include_once 'nav.php';
-    include 'db_connnect.php'
+    include 'db_connect.php'
         ?>
     <div style="max-width: 500px;margin: 0 auto;">
         <h2 class="form-title">Enter Attendence details</h2>

@@ -36,10 +36,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     }
 
     .icon-more {
-        height: 1.5rem;
+        height: 2rem;
         margin-left: 1rem;
         cursor: pointer;
-        padding: 5px;
+        padding: .5rem;
         border-radius: 50%;
     }
 
@@ -64,7 +64,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </style>
 <nav class="navbar navbar-expand-lg fixed-top mt-3 mx-4">
     <div class="container-fluid px-5 py-2">
-        <a class="navbar-brand " href="/adminDashboard.php">
+        <a class="navbar-brand " href="/staffDashboard.php">
             <img src="/img/dlihe_logo.png" style="filter: hue-rotate(-30deg) brightness(0.1);margin-left: .8rem;"
                 width="40" height="40" alt="">
         </a>
@@ -72,7 +72,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <?php echo $_SESSION['name']; ?>
             <img src="/img/more-svgrepo-com.svg" class="icon-more icon" />
             <div class="options ">
-                <div>Logout</div>
+                <div><a href="/logout.php"> Logout</a></div>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-require_once './db_connnect.php';
+require_once './db_connect.php';
 // Prepare the SQL statement
 $sql = "insert into admins values('$username','$hashedPassword' )";
 
