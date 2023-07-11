@@ -91,7 +91,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php if ($currentPage === 'addStudent.php')
-                        echo ' active' ?>" href="/student/addStudent.php">Add Student</a>
+                        echo ' active' ?>" href="/addStudent.php">Add Student</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php if ($currentPage === 'recordAttendence.php')
