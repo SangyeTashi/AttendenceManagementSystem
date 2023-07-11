@@ -10,7 +10,7 @@ function stt() {
 
         //
         modifiedValue = modifiedValue.replace(
-            /^(འི་|ས་|གོ |ངོ་།|དོ།|ནོ།|འོ།|རོ།|སོ།|ཏོ།|ས།|ངས།|༄༅།།|༌།|ར།|ང༌། |ད།|ག |ན།|བ།|མ།|འ།|ར།|ལ།|ས།|རེད།|ཏེ།)/,
+            /^(འི་|གོ |ངོ་།|དོ།|ནོ།|འོ།|རོ།|སོ།|ཏོ།|ངས།|༄༅།།|༌།|ར།|ང༌། |ད།|ག |ན།|བ།|མ།|འ།|ར།|ལ།|ས།|རེད།|ཏེ།)/,
             ''
         );
 
@@ -18,6 +18,9 @@ function stt() {
 
         modifiedValue = modifiedValue.replace(/ང།/g, 'ང་།');
         modifiedValue = modifiedValue.replace(/། །/g, '།། ');
+        modifiedValue = modifiedValue.replace(/།།/g, '།། ');
+        modifiedValue = modifiedValue.replace(/ག །/g, 'ག། ');
+
         // add spaces after shay unless there are two shay together
         modifiedValue = modifiedValue.replace(/(?<!།)།(?!།)/g, '། ');
         // remove extra tsek
@@ -84,25 +87,57 @@ var playButton = document.getElementsByClassName('c01156');
 var parentElement = document.querySelector('.prodigy-buttons');
 // Create a new button element
 var sttbutton = document.createElement('button');
-sttbutton.textContent = 'Click Me';
+sttbutton.textContent = 'Play';
 // Assign the class name 'btn'
 sttbutton.className = 'prodigy-button-correct c01120 c01123 ';
 
 // execute script upon click and play audio
 sttbutton.addEventListener('click', () => {
-    stt();
     playButton[0].click();
 });
 
 // create new accept button
 
 var acceptBtn = document.createElement('button');
+var doFiveButton = document.createElement('button');
 acceptBtn.className = 'c01120 c01123';
+acceptBtn.innerText = 'approve';
+doFiveButton.className = 'c01120 c01123';
+doFiveButton.style.marginLeft = '1rem';
+doFiveButton.innerText = 'Clean';
+
+parentElement.appendChild(sttbutton);
 parentElement.appendChild(acceptBtn);
+parentElement.appendChild(doFiveButton);
 
 acceptBtn.addEventListener('click', () => {
     document.getElementsByClassName('prodigy-button-accept')[0].click();
 });
+doFiveButton.addEventListener('click', () => {
+    let counter = 0;
+
+    const intervalId = setInterval(() => {
+        if (counter < 10) {
+            // Call your function here
+            stt();
+            stt();
+            stt();
+            stt();
+            stt();
+            document.getElementsByClassName('prodigy-button-accept')[0].click();
+            counter++;
+        } else {
+            clearInterval(intervalId); // Stop the interval when counter reaches 10
+            let times = 10;
+            while (times--) {
+                document
+                    .getElementsByClassName('prodigy-button-undo')[0]
+                    .click();
+            }
+            document.getElementsByClassName('prodigy-button-accept')[0].click();
+            document.getElementsByClassName('prodigy-button-undo')[0].click();
+        }
+    }, 400);
+});
 
 // Append the button to the parent element
-parentElement.appendChild(sttbutton);

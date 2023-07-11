@@ -44,12 +44,19 @@ include './db_connect.php'
             $qry = "select * from subjects where staff_id = " . $staffId;
             $res = mysqli_query($connection, $qry);
             while ($r = mysqli_fetch_array($res)) {
-                echo '<li><a href="/recordAttendence.php?subjectId='
+                echo '<li>' . $r['name'] . '. <a href="/recordAttendence.php?subjectId='
                     . $r['id']
                     . '&semester=' . $r['semester']
                     . '&name=' . $r['name']
                     . '">'
-                    . $r['name'] . "</a></li>";
+                    . 'Record' . "</a>";
+                echo '<a href="/subjectAttendence.php?subjectId='
+                    . $r['id']
+                    . '&semester=' . $r['semester']
+                    . '&name=' . $r['name']
+                    . '">'
+                    . '   View' . "</a></li>";
+
             }
             ?>
         </ul>
