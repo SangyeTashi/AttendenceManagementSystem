@@ -2,7 +2,7 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['adminName'])) {
+if (!isset($_SESSION['adminName']) && !isset($_SESSION['staffId'])) {
     // Redirect the user to the login page if not logged in
     header("Location: /unauthorized.php");
     exit;

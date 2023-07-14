@@ -18,6 +18,9 @@ if (!isset($_SESSION['adminName'])) {
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
+<style>
+
+</style>
 
 <body>
 
@@ -55,8 +58,6 @@ if (!isset($_SESSION['adminName'])) {
                     <option value="TIB">TIB</option>
                 </select>
             </div>
-
-
             <div>
                 <label class="form-label" for="semester">Semester:</label>
                 <input class="form-control" type="number" name="semester" id="semester" required>

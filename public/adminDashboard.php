@@ -23,13 +23,40 @@ $username = $_SESSION['adminName'];
 
 </head>
 
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+        grid-gap: 3%;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.60);
+        border-radius: 2rem;
+        padding: 1.5rem 2rem;
+        aspect-ratio: 1/1;
+    }
+</style>
+
 <body>
     <?php include 'adminNav.php' ?>
-    <div class="" style="margin-top: calc(74+8rem);">
-        <h2>Welcome,
-            <?php echo $_SESSION['adminName']; ?>!
-        </h2>
-        <a href="logout.php">Logout</a>
+    <div class="container" style="margin-top:8rem">
+        <div class="card">
+            <h4>Edit</h4>
+            <ul>
+                <li><a href="./addStudent.php"> Student</a></li>
+                <li>Staff</li>
+                <li>Subject</li>
+                <li>Department</li>
+                <li>Annoucement</li>
+            </ul>
+
+        </div>
+        <div class="card">Add Students</div>
+        <div class="card">Write an Annoucement</div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
     </div>
     <script src="../js/bootstrap.bundle.min.js"></script>
 

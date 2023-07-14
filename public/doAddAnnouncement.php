@@ -7,41 +7,35 @@ if (!isset($_SESSION['adminName']) && !isset($_SESSION['staffId'])) {
     header("Location: /unauthorized.php");
     exit;
 }
-
-?>
-<?php
-// Retrieve form data
-$title = $_POST['title'];
-$content = $_POST['content'];
-$to = $_POST['to'];
-$writer = '';
-$writerId = '';
-$redirect = 'admin';
-if (isset($_SESSION['adminName'])) {
-    $writer = 'admins';
-    $writerId = $_SESSION['adminName'];
-} else {
-    $writer = 'staffs';
-    $writerId = $_SESSION['staffId'];
-    $redirect = 'staff';
-}
-include '../public/db_connect.php';
-
-// Prepare the SQL statement
-$sql = "insert into announcements values(CURDATE(),'$title','$content','$to',' $writer','$writerId')";
-
 try {
 
-    if (mysqli_query($connection, $sql)) {
-        header("Location: " . $redirect . "Dashboard.php");
+    // Retrieve form data
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $to = $_POST['to'];
+    $writer = '';
+    $writerId = '';
+    $redirect = 'admin';
+    if (isset($_SESSION['adminName'])) {
+        $writer = 'admins';
+        $writerId = $_SESSION['adminName'];
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+        $writer = 'staffs';
+        $writerId = $_SESSION['staffId'];
+        $redirect = 'staff';
     }
-} catch (Exception $e) {
-    echo $e->getMessage();
+
+    include 'db_connect.php';
+
+    // Prepare the SQL statement
+    $stmt = $connection->prepare("INSERT INTO announcements VALUES (UUID(), CURDATE(), ?, ?, ?, ?, ?)");
+
+    $stmt->execute([$title, $content, $to, $writer, $writerId]);
+    header("Location: " . $redirect . "Dashboard.php");
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 
 // Close the database connection
-mysqli_close($connection);
-
+$connection = null;
 ?>

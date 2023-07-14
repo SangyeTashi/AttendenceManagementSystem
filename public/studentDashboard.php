@@ -8,9 +8,33 @@ if (!isset($_SESSION['studentId'])) {
     exit;
 }
 
+include 'db_connect.php';
+
 $name = $_SESSION['name'];
 $department = $_SESSION['department'];
 $studentId = $_SESSION['studentId'];
+
+try {
+
+    $qry = "SELECT subjects.name,SUM(attendence.isPresent=1) as present_count,SUM(attendence.isPresent = 0) as absent_count 
+            FROM subjects JOIN attendence on subjects.id = attendence.subid JOIN students ON attendence.stid=students.roll_no 
+            WHERE students.roll_no = '$studentId' GROUP BY subjects.name";
+
+
+    $res = mysqli_query($connection, $qry);
+
+    $qry_announcement_admin = "SELECT admins.username,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.username = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
+
+    $qry_announcement_staff = "SELECT staffs.name,announcements.id,announcements.title,announcements.date,announcements.content FROM staffs JOIN announcements ON staffs.id = announcements.writerId WHERE announcements.writer='staffs' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
+
+    $announcements_admin = mysqli_query($connection, $qry_announcement_admin);
+
+    $announcements_staff = mysqli_query($connection, $qry_announcement_staff);
+
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +51,8 @@ $studentId = $_SESSION['studentId'];
             margin-top: calc(88px);
             padding: 3rem;
         }
+
+
 
 
         svg {
@@ -114,26 +140,20 @@ $studentId = $_SESSION['studentId'];
             background-color: rgba(255, 255, 255, 0.65);
             padding: 2rem 2rem;
             border-radius: 2rem;
+            flex-grow: 1;
+        }
+
+        .announcement {
+            margin: 2rem 0;
+            max-width: 700px;
         }
     </style>
 </head>
 
 <body>
     <?php
-    include 'db_connect.php';
     include './studentNav.php';
-    $qry = "SELECT subjects.name,SUM(attendence.isPresent=1) as present_count,SUM(attendence.isPresent = 0) as absent_count 
-            FROM subjects JOIN attendence on subjects.id = attendence.subid JOIN students ON attendence.stid=students.roll_no 
-            WHERE students.roll_no = '$studentId' GROUP BY subjects.name";
-    try {
-
-        $res = mysqli_query($connection, $qry);
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
     ?>
-
-
     <div class="student-container">
         <div class='student'>
             <div class="profile">
@@ -191,9 +211,62 @@ $studentId = $_SESSION['studentId'];
                 ?>
             </div>
         </div>
-            <?php include '../components/announcements.php' ?>
+        <div class='anouncements'>
+            <h6>Announcements</h6>
+            <?php while ($r = mysqli_fetch_array($announcements_admin)) { ?>
+
+                <div class="announcement">
+                    <div style="display:flex;align-items:center">
+                        <h5>
+                            <?php echo $r['title'] ?>
+                        </h5>
+                        <h6 style="margin-left: auto;color:gray;font-size:.9rem">
+                            -
+                            <?php echo $r['username'] ?>
+                        </h6>
+                    </div>
+                    <p style="margin: 0rem 0;">
+                        <?php echo substr($r['content'], 0, 40) ?>...
+                    </p>
+                    <div style="display: flex;align-items: center">
+                        <span style=" color: gray">
+                            <?php echo $r['date'] ?>
+                        </span>
+                        <a style="margin-left:auto;margin-right:2rem;"
+                            href="/announcement.php?w=<?php echo $r['username'] ?>&id=<?php echo $r['id'] ?>">view</a>
+                    </div>
+                </div>
+            <?php }
+
+            while ($r = mysqli_fetch_array($announcements_staff)) { ?>
+
+
+                <div class="announcement">
+                    <div style="display:flex;align-items:center">
+                        <h5>
+                            <?php echo $r['title'] ?>
+                        </h5>
+                        <h6 style="margin-left: auto;color:gray;font-size:.9rem">
+                            -
+                            <?php echo $r['name'] ?>
+                        </h6>
+                    </div>
+                    <p style="margin: 0rem 0;">
+                        <?php echo substr($r['content'], 0, 60) ?>...
+                    </p>
+                    <div style="display: flex;align-items: center">
+                        <span style=" color: gray">
+                            <?php echo $r['date'] ?>
+                        </span>
+                        <a style="margin-left:auto;margin-right:2rem;"
+                            href="/announcement.php?w=<?php echo $r['name'] ?>&id=<?php echo $r['id'] ?>">view</a>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
     </div>
     <script>
+
 
         const meters = document.querySelectorAll('svg[data-value] .meter');
 
@@ -209,6 +282,9 @@ $studentId = $_SESSION['studentId'];
             // Set the Offset
             path.style.strokeDashoffset = Math.max(0, to); path.nextElementSibling.textContent = `${value}%`;
         });
+
+
+
 
     </script>
     <script src="../js/bootstrap.bundle.min.js"></script>
