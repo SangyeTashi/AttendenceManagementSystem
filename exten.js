@@ -10,7 +10,7 @@ function stt() {
 
         //
         modifiedValue = modifiedValue.replace(
-            /^(འི་|གོ |ངོ་།|དོ།|ནོ།|འོ།|རོ།|སོ།|ཏོ།|ངས།|༄༅།།|༌།|ར།|ང༌། |ད།|ག |ན།|བ།|མ།|འ།|ར།|ལ།|ས།|རེད།|ཏེ།)/,
+            /^(འི་|གོ |ངོ་།|དོ།|ནོ།|འོ།|རོ།|སོ།|ཏོ།|ངས།|༄༅།།|༌།|ར།|ང༌། |ད།|ག |ན།|བ།|མ།|འ།|ར།|ལ།|ས།|རེད།|ཏེ།|ཏེ་)/,
             ''
         );
 
@@ -32,12 +32,13 @@ function stt() {
 
         // remove extraspaces
         modifiedValue = modifiedValue.replace(/ +/g, ' ');
+        modifiedValue = modifiedValue.replace(/ི+/g, 'ི');
 
         // add missing yang for lardu
         modifiedValue = modifiedValue.replace(/ང་ང$/, 'ང་ངོ');
         modifiedValue = modifiedValue.replace(/ད་ད$/, 'ད་དོ');
         modifiedValue = modifiedValue.replace(/ར་ར$/, 'ར་རོ');
-        modifiedValue = modifiedValue.replace(/ན་ན$/, 'ན་ནོ');
+        // modifiedValue = modifiedValue.replace(/ན་ན$/, 'ན་ནོ');
         modifiedValue = modifiedValue.replace(/ས་ས$/, 'ས་སོ');
         modifiedValue = modifiedValue.replace(/ག་ག$/, 'ག་གོ');
         modifiedValue = modifiedValue.replace(/ལ་ལ$/, 'ལ་ལོ');
@@ -62,6 +63,7 @@ function stt() {
         modifiedValue = modifiedValue.replace(/ཏོ$/, 'ཏོ།།');
         modifiedValue = modifiedValue.replace(/རོ$/, 'རོ།།');
         modifiedValue = modifiedValue.replace(/ལ་ལོ$/, 'ལ་ལོ།།');
+        modifiedValue = modifiedValue.replace(/༑/, '།');
 
         // add shek at the end
         if (
@@ -82,27 +84,36 @@ function stt() {
         inputField.dispatchEvent(ev2);
     }
 }
-var playButton = document.getElementsByClassName('c01156');
+var playButton = document.getElementsByClassName(
+    '_ToolbarButton-button-0-1-154'
+);
 
 var parentElement = document.querySelector('.prodigy-buttons');
 // Create a new button element
 var sttbutton = document.createElement('button');
 sttbutton.textContent = 'Play';
 // Assign the class name 'btn'
-sttbutton.className = 'prodigy-button-correct c01120 c01123 ';
+sttbutton.className =
+    '_ActionButton-root-0-1-118 _ActionButton-ignore-0-1-121 ';
 
 // execute script upon click and play audio
 sttbutton.addEventListener('click', () => {
     playButton[0].click();
+
+    setTimeout(() => {
+        acceptBtn.focus();
+    }, 400);
 });
 
 // create new accept button
 
 var acceptBtn = document.createElement('button');
 var doFiveButton = document.createElement('button');
-acceptBtn.className = 'c01120 c01123';
+acceptBtn.className =
+    ' _ActionButton-root-0-1-118 _ActionButton-ignore-0-1-121';
 acceptBtn.innerText = 'approve';
-doFiveButton.className = 'c01120 c01123';
+doFiveButton.className =
+    '_ActionButton-root-0-1-118 _ActionButton-ignore-0-1-121';
 doFiveButton.style.marginLeft = '1rem';
 doFiveButton.innerText = 'Clean';
 
@@ -112,6 +123,9 @@ parentElement.appendChild(doFiveButton);
 
 acceptBtn.addEventListener('click', () => {
     document.getElementsByClassName('prodigy-button-accept')[0].click();
+    setTimeout(() => {
+        sttbutton.focus();
+    }, 400);
 });
 doFiveButton.addEventListener('click', () => {
     let counter = 0;
@@ -119,6 +133,7 @@ doFiveButton.addEventListener('click', () => {
     const intervalId = setInterval(() => {
         if (counter < 10) {
             // Call your function here
+            stt();
             stt();
             stt();
             stt();
@@ -134,8 +149,14 @@ doFiveButton.addEventListener('click', () => {
                     .getElementsByClassName('prodigy-button-undo')[0]
                     .click();
             }
-            document.getElementsByClassName('prodigy-button-accept')[0].click();
-            document.getElementsByClassName('prodigy-button-undo')[0].click();
+            setTimeout(() => {
+                acceptBtn.click();
+                setTimeout(() => {
+                    document
+                        .getElementsByClassName('prodigy-button-undo')[0]
+                        .click();
+                }, 1400);
+            }, 2000);
         }
     }, 400);
 });

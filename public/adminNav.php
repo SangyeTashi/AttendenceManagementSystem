@@ -81,8 +81,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($currentPage === 'index.php')
-                        echo ' active' ?>" href="/index.php">Home
+                    <a class="nav-link <?php if ($currentPage === 'adminDashboard.php')
+                        echo ' active' ?>" href="/adminDashboard.php">Home
                         </a>
                     </li>
                     <a class="nav-link <?php if ($currentPage === 'addSubject.php')
@@ -94,8 +94,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                         echo ' active' ?>" href="/addStudent.php">Add Student</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($currentPage === 'recordAttendence.php')
-                        echo ' active' ?>" href="/recordAttendence.php">Record Attendence</a>
+                        <a class="nav-link <?php if ($currentPage === 'createAnnouncement.php')
+                        echo ' active' ?>" href="/createAnnouncement.php">Write Announcement</a>
                     </li>
 
                 </ul>

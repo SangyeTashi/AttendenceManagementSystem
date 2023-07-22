@@ -49,10 +49,17 @@ if (!isset($_SESSION['adminName']) && !isset($_SESSION['staffId'])) {
                 <select class="form-control" type="text" name="to" required>
                     <option value="everyone">Everyone</option>
                     <option value="staff">staff</option>
-                    <option value="BCA">BCA</option>
-                    <option value="BCOM">BCOM</option>
-                    <option value="BCOM">BBA</option>
-                    <option value="TIB">TIB</option>
+                    <?php
+                    include 'db_connect.php';
+                    $sql = 'select id from departments';
+                    $res = mysqli_query($connection, $sql);
+                    while ($row = mysqli_fetch_array($res)) {
+                        ?>
+
+                        <option value="<?php echo $row['id'] ?>"><?php echo $row['id'] ?></option>
+                        <?php
+                    }
+                    ?>
                 </select>
             </div>
 

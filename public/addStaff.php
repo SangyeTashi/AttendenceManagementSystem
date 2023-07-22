@@ -21,8 +21,9 @@ if (!isset($_SESSION['adminName'])) {
 
 <body>
     <?php
-    include_once './adminNav.php'
-        ?>
+    include_once './adminNav.php';
+
+    ?>
 
 
     <div style="max-width: 500px;margin: 0 auto;">
@@ -51,10 +52,17 @@ if (!isset($_SESSION['adminName'])) {
             <div>
                 <label class="form-label" for="department">Department</label>
                 <select class="form-select" required name="department">
-                    <option value="BCA">BCA</option>
-                    <option value="BCOM">BCOM</option>
-                    <option value="BBA">BBA</option>
-                    <option value="TIB">TIB</option>
+                    <?php
+                    include 'db_connect.php';
+                    $sql = 'select id from departments';
+                    $res = mysqli_query($connection, $sql);
+                    while ($row = mysqli_fetch_array($res)) {
+                        ?>
+
+                        <option value="<?php echo $row['id'] ?>"><?php echo $row['id'] ?></option>
+                        <?php
+                    }
+                    ?>
                 </select>
             </div>
             <input class="form-control btn btn-primary mt-3" type="submit" value="Add staff">

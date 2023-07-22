@@ -25,7 +25,7 @@ if (!isset($_SESSION['adminName'])) {
 <body>
 
 
-    <?php include '../adminNav.php' ?>
+    <?php include './adminNav.php' ?>
     <div style="max-width: 500px;margin: 0 auto;">
         <h2 class="form-title">Enter student details</h2>
         <?php
@@ -37,14 +37,16 @@ if (!isset($_SESSION['adminName'])) {
         }
         ?>
         <form style="margin-top : 3rem" class="form" action="./pushStudent.php" method="POST">
-            <div>
-                <label class="form-label" for="rollNo">Roll No</label>
-                <input class="form-control" type="number" name="rollNo" id="rollNo" required>
-            </div>
-            <div>
-                <label class="form-label" for="name">Name:</label>
-                <input class="form-control" type="text" name="name" id="name" required>
-            </div>
+            <div class="form-row">
+                <div class='col'>
+                    <label class="form-label" for="rollNo">Roll No</label>
+                    <input class="form-control" type="number" name="rollNo" id="rollNo" required>
+                </div>
+                <div class='col'>
+                    <label class="form-label" for="name">Name:</label>
+                    <input class="form-control" type="text" name="name" id="name" required>
+                </div>
+            </div class="form-row">
             <div>
                 <label class="form-label" for="password">Password</label>
                 <input class="form-control" type="password" name="password" required>
@@ -52,10 +54,17 @@ if (!isset($_SESSION['adminName'])) {
             <div>
                 <label class="form-label" for="department">Department</label>
                 <select class="form-select" required name="department">
-                    <option value="BCA">BCA</option>
-                    <option value="BCOM">BCOM</option>
-                    <option value="BBA">BBA</option>
-                    <option value="TIB">TIB</option>
+                    <?php
+                    include 'db_connect.php';
+                    $sql = 'select id from departments';
+                    $res = mysqli_query($connection, $sql);
+                    while ($row = mysqli_fetch_array($res)) {
+                        ?>
+
+                        <option value="<?php echo $row['id'] ?>"><?php echo $row['id'] ?></option>
+                        <?php
+                    }
+                    ?>
                 </select>
             </div>
             <div>
@@ -68,6 +77,41 @@ if (!isset($_SESSION['adminName'])) {
         </form>
 
     </div>
+    <?php
+    include './queryFunctions.php';
+    try {
+        $res = getStudents();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+
+    ?>
+    <table>
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Semester</th>
+        </tr>
+        <?php
+        while ($row = mysqli_fetch_array($res)) {
+            ?>
+            <tr>
+                <td>
+                    <?php echo $row['roll_no'] ?>
+                </td>
+                <td>
+                    <?php echo $row['name'] ?>
+                </td>
+                <td>
+                    <?php echo $row['department'] ?>
+                </td>
+                <td>
+                    <?php echo $row['semester'] ?>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <?php include '../footer.php' ?>
 </body>
