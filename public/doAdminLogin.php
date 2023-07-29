@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Validate the user credentials against the database
-    $sql = "SELECT * FROM admins WHERE username = ?";
+    $sql = "SELECT * FROM admins WHERE id = ?";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("i", $adminName);
     $stmt->execute();
@@ -21,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify the password (use appropriate password hashing algorithm, e.g., password_hash())
         if (password_verify($password, $row['password'])) {
             // Authentication successful, store user details in the session
-            $_SESSION['adminName'] = $row['username'];
+            $_SESSION['adminName'] = $row['id'];
 
             header("Location: adminDashboard.php");
             exit();

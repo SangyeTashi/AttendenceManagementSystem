@@ -85,7 +85,7 @@ function stt() {
     }
 }
 var playButton = document.getElementsByClassName(
-    '_ToolbarButton-button-0-1-154'
+    '_ToolbarButton-button-0-1-185'
 );
 
 var parentElement = document.querySelector('.prodigy-buttons');
@@ -94,7 +94,7 @@ var sttbutton = document.createElement('button');
 sttbutton.textContent = 'Play';
 // Assign the class name 'btn'
 sttbutton.className =
-    '_ActionButton-root-0-1-118 _ActionButton-ignore-0-1-121 ';
+    ' _ActionButton-root-0-1-149 ActionButton-ignore-0-1-121 ';
 
 // execute script upon click and play audio
 sttbutton.addEventListener('click', () => {
@@ -110,10 +110,10 @@ sttbutton.addEventListener('click', () => {
 var acceptBtn = document.createElement('button');
 var doFiveButton = document.createElement('button');
 acceptBtn.className =
-    ' _ActionButton-root-0-1-118 _ActionButton-ignore-0-1-121';
+    '  _ActionButton-root-0-1-149 ActionButton-ignore-0-1-121';
 acceptBtn.innerText = 'approve';
 doFiveButton.className =
-    '_ActionButton-root-0-1-118 _ActionButton-ignore-0-1-121';
+    ' _ActionButton-root-0-1-149 ActionButton-ignore-0-1-121';
 doFiveButton.style.marginLeft = '1rem';
 doFiveButton.innerText = 'Clean';
 
@@ -142,19 +142,19 @@ doFiveButton.addEventListener('click', () => {
             document.getElementsByClassName('prodigy-button-accept')[0].click();
             counter++;
         } else {
+            let undo = document.getElementsByClassName(
+                'prodigy-button-undo'
+            )[0];
+
             clearInterval(intervalId); // Stop the interval when counter reaches 10
             let times = 10;
             while (times--) {
-                document
-                    .getElementsByClassName('prodigy-button-undo')[0]
-                    .click();
+                undo.click();
             }
             setTimeout(() => {
                 acceptBtn.click();
                 setTimeout(() => {
-                    document
-                        .getElementsByClassName('prodigy-button-undo')[0]
-                        .click();
+                    undo.click();
                 }, 1400);
             }, 2000);
         }

@@ -77,41 +77,47 @@ if (!isset($_SESSION['adminName'])) {
         </form>
 
     </div>
+
     <?php
-    include './queryFunctions.php';
-    try {
-        $res = getStudents();
-    } catch (Exception $e) {
-        echo $e->getMessage();
+    include 'db_connect.php';
+    $query = "SELECT * FROM students";
+
+    // Execute the query
+    $result = mysqli_query($connection, $query);
+
+    // Check if there are any rows in the result
+    if (mysqli_num_rows($result) > 0) {
+        // Output HTML table start
+        echo "<table border='1'>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Semester</th>
+            </tr>";
+
+        // Loop through each row of the result and fetch data
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Output each row as a table row
+            echo "<tr>
+                <td>" . $row['roll_no'] . "</td>
+                <td>" . $row['name'] . "</td>
+                <td>" . $row['department'] . "</td>
+                <td>" . $row['semester'] . "</td>
+              </tr>";
+        }
+
+        // Output HTML table end
+        echo "</table>";
+    } else {
+        // If there are no students in the database
+        echo "No students found in the database.";
     }
 
+    // Don't forget to close the MySQL connection when done
+    mysqli_close($connection);
     ?>
-    <table>
-        <tr>
-            <th>Roll No</th>
-            <th>Name</th>
-            <th>Department</th>
-            <th>Semester</th>
-        </tr>
-        <?php
-        while ($row = mysqli_fetch_array($res)) {
-            ?>
-            <tr>
-                <td>
-                    <?php echo $row['roll_no'] ?>
-                </td>
-                <td>
-                    <?php echo $row['name'] ?>
-                </td>
-                <td>
-                    <?php echo $row['department'] ?>
-                </td>
-                <td>
-                    <?php echo $row['semester'] ?>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
+
     <script src="../js/bootstrap.bundle.min.js"></script>
     <?php include '../footer.php' ?>
 </body>

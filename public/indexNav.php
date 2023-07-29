@@ -1,6 +1,9 @@
 <?php
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>
     * {
         box-sizing: border-box;
@@ -8,6 +11,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     body {
         background-image: url('https://wallpapercave.com/wp/wp4465115.jpg');
+        font-family: 'PT Sans', sans-serif;
     }
 
     .active {

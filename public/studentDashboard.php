@@ -17,13 +17,13 @@ $studentId = $_SESSION['studentId'];
 try {
 
     $qry = "SELECT subjects.name,SUM(attendence.isPresent=1) as present_count,SUM(attendence.isPresent = 0) as absent_count 
-            FROM subjects JOIN attendence on subjects.id = attendence.subid JOIN students ON attendence.stid=students.roll_no 
-            WHERE students.roll_no = '$studentId' GROUP BY subjects.name";
+            FROM subjects JOIN attendence on subjects.id = attendence.subid JOIN students ON attendence.stid=students.id 
+            WHERE students.id = '$studentId' GROUP BY subjects.name";
 
 
     $res = mysqli_query($connection, $qry);
 
-    $qry_announcement_admin = "SELECT admins.username,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.username = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
+    $qry_announcement_admin = "SELECT admins.id,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.id = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
 
     $qry_announcement_staff = "SELECT staffs.name,announcements.id,announcements.title,announcements.date,announcements.content FROM staffs JOIN announcements ON staffs.id = announcements.writerId WHERE announcements.writer='staffs' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
 

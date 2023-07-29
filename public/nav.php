@@ -8,6 +8,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     body {
         background-image: url('https://wallpapercave.com/wp/wp4465115.jpg');
+        font-family: 'PT Sans', sans-serif;
     }
 
     .active {
@@ -63,6 +64,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         box-shadow: .5rem .5rem 2rem #a1a1a1;
     }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <nav class="navbar navbar-expand-lg fixed-top mt-3 mx-4">
     <div class="container-fluid px-5 py-2">
         <a class="navbar-brand " href="/adminDashboard.php">

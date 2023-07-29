@@ -37,10 +37,10 @@ $semester = $_GET['semester'];
     include 'staffNav.php';
 
     try {
-    $qry = "SELECT students.name , SUM(attendence.isPresent = 1) AS present_count, 
+        $qry = "SELECT students.name , SUM(attendence.isPresent = 1) AS present_count, 
     SUM(attendence.isPresent = 0) AS absent_count
     FROM students
-    JOIN attendence ON attendence.stid = students.roll_no
+    JOIN attendence ON attendence.stid = students.id
     JOIN subjects ON subjects.id = attendence.subid  WHERE subjects.id = '$subject' AND students.semester ='$semester' GROUP BY students.name
     ";
         $res = mysqli_query($connection, $qry);
