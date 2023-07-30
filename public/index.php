@@ -67,7 +67,7 @@
     </style>
 </head>
 
-<body>
+<body style="margin-top:7rem">
     <?php include_once 'indexNav.php' ?>
     <div class="jumbotron">
         <div class="text-center">

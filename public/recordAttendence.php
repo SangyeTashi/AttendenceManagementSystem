@@ -29,7 +29,7 @@ $department = $_SESSION['department'];
 
 </head>
 
-<body>
+<body style="margin-top:7rem">
 
 
     <?php

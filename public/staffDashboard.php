@@ -31,7 +31,7 @@ include './db_connect.php'
     </style>
 </head>
 
-<body>
+<body style="margin-top:7rem">
     <?php include './staffNav.php' ?>
     <div class="staff-container">
         <h2>Welcome,

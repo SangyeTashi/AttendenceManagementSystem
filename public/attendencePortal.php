@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 
-<body>
+<body style="margin-top:7rem">
     <?php
     include_once 'nav.php';
     include 'db_connect.php'
@@ -38,8 +38,8 @@
                     $res = mysqli_query($connection, $qry);
                     while ($r = mysqli_fetch_array($res)) {
                         ?>
-                        <option value="<?php echo $r['abbreviation'] ?>">
-                            <?php echo $r['abbreviation']; ?>
+                        <option value="<?php echo $r['id'] ?>">
+                            <?php echo $r['id']; ?>
                         </option>
                         <?php
                     }

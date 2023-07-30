@@ -28,7 +28,7 @@ $semester = $_GET['semester'];
 
 </head>
 
-<body>
+<body style="margin-top:7rem">
 
 
     <?php

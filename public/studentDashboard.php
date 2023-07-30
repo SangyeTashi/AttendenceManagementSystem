@@ -150,7 +150,7 @@ try {
     </style>
 </head>
 
-<body>
+<body style="margin-top:7rem">
     <?php
     include './studentNav.php';
     ?>

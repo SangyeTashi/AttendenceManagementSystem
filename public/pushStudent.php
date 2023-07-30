@@ -10,37 +10,42 @@ if (!isset($_SESSION['adminName'])) {
 
 ?>
 <?php
-// Retrieve form data
-$rollNo = $_POST['rollNo'];
-$department = $_POST['department'];
-$semester = $_POST['semester'];
-$name = ucwords($_POST['name']);
-$password = $_POST['password'];
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+try {
 
-require_once '../db_connect.php';
-// Prepare the SQL statement
-$sql = "insert into students values($rollNo, '$department', $semester, '$name','$hashedPassword' )";
+    // Retrieve form data
+    $rollNo = $_POST['rollNo'];
+    $department = $_POST['department'];
+    $semester = $_POST['semester'];
+    $name = ucwords($_POST['name']);
+    $password = $_POST['password'];
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-
-// Check if RollNo already exists
-$checkQuery = "select roll_no FROM students WHERE roll_no = '$rollNo'";
-$result = mysqli_query($connection, $checkQuery);
+    require_once 'db_connect.php';
+    // Prepare the SQL statement
+    $sql = "insert into students values($rollNo, '$department', $semester, '$name','$hashedPassword' )";
 
 
-if (mysqli_num_rows($result) > 0) {
-    // RollNo already exists
-    header("Location: addStudent.php?msg=3");
+    // Check if RollNo already exists
+    $checkQuery = "select id FROM students WHERE id = '$rollNo'";
+    $result = mysqli_query($connection, $checkQuery);
 
-} else {
 
-    if (mysqli_query($connection, $sql)) {
-        header("Location: addStudent.php?msg=1");
+    if (mysqli_num_rows($result) > 0) {
+        // RollNo already exists
+        header("Location: addStudent.php?msg=3");
+
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($connection);
-    }
-}
 
+        if (mysqli_query($connection, $sql)) {
+            header("Location: addStudent.php?msg=1");
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($connection);
+        }
+    }
+
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
 // Close the database connection
 mysqli_close($connection);
 

@@ -60,9 +60,17 @@ $username = $_SESSION['adminName'];
     }
 </style>
 
-<body>
+<body style="margin-top:7rem">
     <?php include 'adminNav.php' ?>
-    <div class="container" style="margin-top:8rem">
+    <div class="container stats" style="margin-top:8rem">
+        <div>
+            <h3>
+                Number of Students with attendance shortage
+            </h3>
+            <div></div>
+        </div>
+    </div>
+    <div class="container" style="">
         <div class="card">
             <h4 class='card-title'>Manage Students</h4>
             <img class="png-img" src="./img/student.png" alt="student-png-image">

@@ -45,9 +45,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         box-shadow: 2rem 0rem 3rem rgba(0, 0, 0, 0.20);
     }
 
-    .form-title {
-        margin-top: calc(82px + 4rem);
-    }
+
 
 
     /* form */

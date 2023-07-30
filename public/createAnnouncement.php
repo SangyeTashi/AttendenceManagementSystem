@@ -19,7 +19,7 @@ if (!isset($_SESSION['adminName']) && !isset($_SESSION['staffId'])) {
 
 </head>
 
-<body>
+<body style="margin-top:7rem">
     <?php
     include_once './adminNav.php'
         ?>
