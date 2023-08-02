@@ -20,6 +20,7 @@ function stt() {
         modifiedValue = modifiedValue.replace(/། །/g, '།། ');
         modifiedValue = modifiedValue.replace(/།།/g, '།། ');
         modifiedValue = modifiedValue.replace(/ག །/g, 'ག། ');
+        modifiedValue = modifiedValue.replace(/[·+-:]/g, '');
 
         // add spaces after shay unless there are two shay together
         modifiedValue = modifiedValue.replace(/(?<!།)།(?!།)/g, '། ');
@@ -43,6 +44,9 @@ function stt() {
         modifiedValue = modifiedValue.replace(/ག་ག$/, 'ག་གོ');
         modifiedValue = modifiedValue.replace(/ལ་ལ$/, 'ལ་ལོ');
 
+        modifiedValue = modifiedValue.replace(/འདུག(?!་|།)/g, 'འདུག ');
+        modifiedValue = modifiedValue.replace(/ཏོག(?!་| |)/g, 'ཏོག ');
+
         if (modifiedValue.endsWith('ང་')) {
             modifiedValue += '།';
         } else if (modifiedValue.endsWith('ང')) {
@@ -65,6 +69,14 @@ function stt() {
         modifiedValue = modifiedValue.replace(/ལ་ལོ$/, 'ལ་ལོ།།');
         modifiedValue = modifiedValue.replace(/༑/, '།');
 
+        modifiedValue = modifiedValue.replace(
+            /([ཀཁངཅཆཇཉཏཐནཔཕཙཚཛཝཞཟཡརལཤསཧཨ])(?=[ཀཁཅཆཇཉཏཐཔཕཙཚཛཝཞཟཡཤཧཨ])(?![་།])/g,
+            '$1།'
+        );
+        modifiedValue = modifiedValue.replace(
+            /([ིེོུ])(?=[ཀཁཅཆཇཉཏཐཔཕཙཚཛཝཞཟཡཤཧཨ])(?![་།])/g,
+            '$1།'
+        );
         // add shek at the end
         if (
             !modifiedValue.endsWith('།') &&
@@ -86,37 +98,41 @@ function stt() {
 }
 var playButton = document.getElementsByClassName(
     '_ToolbarButton-button-0-1-185'
-);
-
+)[0];
+var playButtonAfterSave = document.getElementsByClassName(
+    '_ToolbarButton-button-0-1-378'
+)[0];
 var parentElement = document.querySelector('.prodigy-buttons');
 // Create a new button element
 var sttbutton = document.createElement('button');
 sttbutton.textContent = 'Play';
 // Assign the class name 'btn'
-sttbutton.className =
-    ' _ActionButton-root-0-1-149 ActionButton-ignore-0-1-121 ';
+sttbutton.className = 'prodigy-button-ignore';
 
 // execute script upon click and play audio
 sttbutton.addEventListener('click', () => {
-    playButton[0].click();
+    playButton.click();
+    playButtonAfterSave.click();
 
-    setTimeout(() => {
-        acceptBtn.focus();
-    }, 400);
+    // setTimeout(() => {
+    //     acceptBtn.focus();
+    // }, 400);
 });
 
 // create new accept button
 
 var acceptBtn = document.createElement('button');
 var doFiveButton = document.createElement('button');
-acceptBtn.className =
-    '  _ActionButton-root-0-1-149 ActionButton-ignore-0-1-121';
+acceptBtn.className = 'prodigy-button-ignore';
 acceptBtn.innerText = 'approve';
-doFiveButton.className =
-    ' _ActionButton-root-0-1-149 ActionButton-ignore-0-1-121';
+doFiveButton.className = 'prodigy-button-ignore';
 doFiveButton.style.marginLeft = '1rem';
 doFiveButton.innerText = 'Clean';
+let button = document.getElementsByClassName('prodigy-button-ignore')[0];
 
+sttbutton.className = button.className;
+acceptBtn.className = button.className;
+doFiveButton.className = button.className;
 parentElement.appendChild(sttbutton);
 parentElement.appendChild(acceptBtn);
 parentElement.appendChild(doFiveButton);
@@ -147,10 +163,7 @@ doFiveButton.addEventListener('click', () => {
             )[0];
 
             clearInterval(intervalId); // Stop the interval when counter reaches 10
-            let times = 10;
-            while (times--) {
-                undo.click();
-            }
+            undoEveryInterval();
             setTimeout(() => {
                 acceptBtn.click();
                 setTimeout(() => {
@@ -161,4 +174,46 @@ doFiveButton.addEventListener('click', () => {
     }, 400);
 });
 
-// Append the button to the parent element
+const undoEveryInterval = () => {
+    let undoBtn = document.getElementsByClassName('prodigy-button-undo')[0];
+    let counter = 0;
+    const intervalId = setInterval(() => {
+        if (counter < 10) {
+            undoBtn.click();
+            counter++;
+        } else {
+            clearInterval(intervalId);
+        }
+    }, 100);
+};
+
+// To copystyles of default buttons to custom buttons when the classnames
+// the default changes when saving.
+
+// Get the element whose class name changes you want to listen to
+const targetElement = document.getElementsByClassName(
+    'prodigy-button-ignore'
+)[0];
+
+// Create a new MutationObserver
+const observer = new MutationObserver((mutationsList) => {
+    // Loop through the mutation records
+    for (const mutation of mutationsList) {
+        if (
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'class'
+        ) {
+            // Handle class name changes here
+            const newClassName = mutation.target.className;
+            sttbutton.className = newClassName;
+            doFiveButton.className = newClassName;
+            acceptBtn.className = newClassName;
+        }
+    }
+});
+
+// Start observing the target element for class attribute changes
+observer.observe(targetElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+});

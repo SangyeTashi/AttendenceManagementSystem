@@ -17,16 +17,14 @@ try {
         $id = $_POST['id'];
         $name = $_POST['name'];
         $department = $_POST['department'];
-        $semester = $_POST['semester'];
 
-        $updateQry = "UPDATE students SET id = " . $id . ",
+        $updateQry = "UPDATE staffs SET id = " . $id . ",
                                     name = '" . $name . "',
-                                    department = '" . $department . "',
-                                    semester = " . $semester . "
+                                    department = '" . $department . "'
                                      WHERE id = " . $prevId . "";
         $result = mysqli_query($connection, $updateQry);
         if ($result) {
-            header('Location: /addStudent.php');
+            header('Location: /addStaff.php');
         } else {
             echo "Error : " . mysqli_error($connection);
         }
@@ -38,20 +36,20 @@ try {
 $id = $_GET['id'];
 
 
-$qry = 'select * from students where id = ' . $id . '';
+$qry = 'select * from staffs where id = ' . $id . '';
 $datas = mysqli_query($connection, $qry);
 ?>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>Edit Students</title>
+    <title>Edit Staff</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 <?php include 'adminNav.php'; ?>
 
 <body style="margin-top: 7rem;">
     <div class="addForm" style="max-width: 500px;margin: 0 auto;">
-        <h2 class="form-title">Enter student details</h2>
+        <h2 class="form-title">Enter Staff details</h2>
         <form style="margin-top : 3rem" class="form" action="" method="POST">
             <?php
             while ($data = mysqli_fetch_array($datas)) {
@@ -81,18 +79,9 @@ $datas = mysqli_query($connection, $qry);
                                    echo 'selected'
                                        ?>>
                                 <?php echo $r['id']; ?>
-
-
-
                             </option>
                         <?php } ?>
                     </select>
-                </div>
-                <div class="form-row">
-                    <div class='col'>
-                        <label class="form-label" for="semester">Semester</label>
-                        <input class="form-control" type="number" name='semester' value="<?php echo $data['semester'] ?>">
-                    </div>
                 </div>
                 <input style="display: none;" type="number" name='prevId' value="<?php echo $data['id'] ?>">
                 <?php
