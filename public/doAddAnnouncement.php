@@ -30,7 +30,10 @@ try {
     $stmt = $connection->prepare("INSERT INTO announcements VALUES (UUID(), CURDATE(), ?, ?, ?, ?, ?)");
 
     $stmt->execute([$title, $content, $to, $writer, $writerId]);
-    header("Location: createAnnouncement.php");
+    if (isset($_POST['writer']))
+        header("Location: staffDashboard.php");
+    else
+        header("Location: createAnnouncement.php");
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

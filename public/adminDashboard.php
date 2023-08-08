@@ -62,14 +62,7 @@ $username = $_SESSION['adminName'];
 
 <body style="margin-top:7rem">
     <?php include 'adminNav.php' ?>
-    <div class="container stats" style="margin-top:8rem">
-        <div>
-            <h3>
-                Number of Students with attendance shortage
-            </h3>
-            <div></div>
-        </div>
-    </div>
+
     <div class="container" style="">
         <div class="card">
             <h4 class='card-title'>Manage Students</h4>
@@ -102,6 +95,15 @@ $username = $_SESSION['adminName'];
             <h4 class='card-title'>Write Annoucement</h4>
             <img class="png-img" src="./img/notification.png" alt="student-png-image">
             <a class="btn-container" href="./createAnnouncement.php">
+                <button class='btn btn-primary'>
+                    Go
+                </button>
+            </a>
+        </div>
+        <div class="card">
+            <h4 class='card-title'>Manage Subject</h4>
+            <img class="png-img" src="./img/subjects.png" alt="student-png-image">
+            <a class="btn-container" href="./addSubject.php">
                 <button class='btn btn-primary'>
                     Go
                 </button>

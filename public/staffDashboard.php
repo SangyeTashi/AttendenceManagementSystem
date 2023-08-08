@@ -257,7 +257,7 @@ try {
                     </div>
                 </div>
             <?php } ?>
-            <a href="createAnnouncement.php">
+            <a href="staffMakeAnnouncement.php">
                 <button class="btn btn-primary" style="align-self: flex-end;">Make an Announcement</button>
             </a>
         </div>
