@@ -114,9 +114,9 @@ sttbutton.addEventListener('click', () => {
     playButton.click();
     playButtonAfterSave.click();
 
-    // setTimeout(() => {
-    //     acceptBtn.focus();
-    // }, 400);
+    setTimeout(() => {
+        acceptBtn.focus();
+    }, 100);
 });
 
 // create new accept button

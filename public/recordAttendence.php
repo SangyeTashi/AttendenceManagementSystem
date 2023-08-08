@@ -33,7 +33,6 @@ $department = $_SESSION['department'];
 
 
     <?php
-    echo $department;
     include 'db_connect.php';
     include 'staffNav.php';
 
@@ -54,12 +53,12 @@ $department = $_SESSION['department'];
                 <div style="display:flex">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" style="padding:5px;cursor: pointer;"
-                            name="attendence[<?php echo $r['roll_no'] ?>]" id="inlineRadio1" value="1" checked>
+                            name="attendence[<?php echo $r['id'] ?>]" id="inlineRadio1" value="1" checked>
                         <label class="form-check-label" for="inlineRadio1">P</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" style="padding:5px;cursor: pointer;"
-                            name="attendence[<?php echo $r['roll_no'] ?>]" id="inlineRadio2" value="0">
+                            name="attendence[<?php echo $r['id'] ?>]" id="inlineRadio2" value="0">
                         <label class="form-check-label" for="inlineRadio2">A</label>
                     </div>
                 </div>

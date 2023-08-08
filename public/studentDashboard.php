@@ -23,7 +23,7 @@ try {
 
     $res = mysqli_query($connection, $qry);
 
-    $qry_announcement_admin = "SELECT admins.id,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.id = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
+    $qry_announcement_admin = "SELECT admins.id as adminName,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.id = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
 
     $qry_announcement_staff = "SELECT staffs.name,announcements.id,announcements.title,announcements.date,announcements.content FROM staffs JOIN announcements ON staffs.id = announcements.writerId WHERE announcements.writer='staffs' AND announcements.written_to='$department' OR announcements.written_to = 'everyone'";
 
@@ -119,9 +119,9 @@ try {
         }
 
         .profile-picture {
-            width: 5rem;
+            width: 6rem;
             border-radius: 50%;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
         .student {
@@ -158,9 +158,22 @@ try {
         <div class='student'>
             <div class="profile">
                 <img class="profile-picture" src="./img/blankProfile.jpg" alt="">
-                <h5>
+                <h4>
                     <?php echo ucwords($_SESSION['name']); ?>
-                </h5>
+                </h4>
+                <span>
+                    <?php echo $_SESSION['semester'] . "th Semester" ?>
+                </span>
+                <div style="margin-top:1rem;display:flex;align-items:center;justify-content:space-around;width: 100%;"
+                    ;>
+                    <div>
+                        <?php echo $_SESSION['department'] ?>
+                    </div>
+                    <div>
+                        ID:
+                        <?php echo $_SESSION['studentId'] ?>
+                    </div>
+                </div>
             </div>
             <div class='attendence'>
                 <h4 style='text-align: center' ;>Attendance</h4>
@@ -222,7 +235,7 @@ try {
                         </h5>
                         <h6 style="margin-left: auto;color:gray;font-size:.9rem">
                             -
-                            <?php echo $r['username'] ?>
+                            <?php echo $r['adminName'] ?>
                         </h6>
                     </div>
                     <p style="margin: 0rem 0;">
@@ -233,7 +246,7 @@ try {
                             <?php echo $r['date'] ?>
                         </span>
                         <a style="margin-left:auto;margin-right:2rem;"
-                            href="/announcement.php?w=<?php echo $r['username'] ?>&id=<?php echo $r['id'] ?>">view</a>
+                            href="/announcement.php?w=<?php echo $r['adminName'] ?>&id=<?php echo $r['id'] ?>">view</a>
                     </div>
                 </div>
             <?php }
@@ -248,7 +261,10 @@ try {
                         </h5>
                         <h6 style="margin-left: auto;color:gray;font-size:.9rem">
                             -
-                            <?php echo $r['name'] ?>
+                            <?php
+                            echo $r['name'];
+                            ?>
+
                         </h6>
                     </div>
                     <p style="margin: 0rem 0;">
@@ -258,8 +274,8 @@ try {
                         <span style=" color: gray">
                             <?php echo $r['date'] ?>
                         </span>
-                        <a style="margin-left:auto;margin-right:2rem;"
-                            href="/announcement.php?w=<?php echo $r['name'] ?>&id=<?php echo $r['id'] ?>">view</a>
+                        <a style="margin-left:auto;margin-right:2rem;" href="/announcement.php?w=<?php echo $r['name'];
+                        ?>&id=<?php echo $r['id'] ?>">view</a>
                     </div>
                 </div>
             <?php } ?>

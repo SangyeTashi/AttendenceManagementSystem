@@ -15,7 +15,6 @@ try {
     $to = $_POST['to'];
     $writer = '';
     $writerId = '';
-    $redirect = 'admin';
     if (isset($_SESSION['adminName'])) {
         $writer = 'admins';
         $writerId = $_SESSION['adminName'];
@@ -31,7 +30,7 @@ try {
     $stmt = $connection->prepare("INSERT INTO announcements VALUES (UUID(), CURDATE(), ?, ?, ?, ?, ?)");
 
     $stmt->execute([$title, $content, $to, $writer, $writerId]);
-    header("Location: " . $redirect . "Dashboard.php");
+    header("Location: createAnnouncement.php");
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

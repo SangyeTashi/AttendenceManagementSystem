@@ -24,16 +24,7 @@
                 <label class="form-label" for="password">Password:</label>
                 <input class="form-control" type="password" name="password" id="password" required>
             </div>
-            <div class="d-flex align-items-center mt-3">
-                <label class="form-label" style="width: 50%;" for="loginType">Login as:</label>
-                <select class="form-select" name="loginType" id="loginType">
-                    <option value="students">
-                        Student
-                    </option>
-                    <option value="staffs">Staff</option>
-                    <option value="admins">Admin</option>
-                </select>
-            </div>
+
 
 
             <input class="form-control btn btn-primary mt-3" type="submit" value="Login">

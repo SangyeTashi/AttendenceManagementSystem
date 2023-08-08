@@ -33,26 +33,27 @@ $res = mysqli_query($connection, $qry);
     }
 </style>
 
-<body style="maxwidth: 1200px;padding: 4rem;>
+<body style="maxwidth: 1200px;padding: 4rem">
 
     <?php
-    while ($r = mysqli_fetch_array($res)) {
-        ?>
-        <h1>
+    while ($r = mysqli_fetch_array($res)) { ?>
+
+        <h3>
             <?php echo $r['title'] ?>
-        </h1>
+        </h3>
         <div>
             <span style=" margin-right: auto;">
-    <?php echo $r['date'] ?>
-    </span>
-    <span>
-        <?php echo $writer ?>
-    </span>
-    </div>
-    <pre> <?php echo $r['content'] ?></pre>
+                <?php echo $r['date'] ?>
+            </span>
+            <span style="margin-left: 5rem;">
+                ~
+                <?php echo $writer ?>
+            </span>
+        </div>
+        <pre> <?php echo $r['content'] ?></pre>
 
-    <button> <a href="javascript:history.back()"> done</a></button>
-    <?php
+        <button> <a href="javascript:history.back()"> done</a></button>
+        <?php
     }
     ?>
 

@@ -7,7 +7,7 @@ if (!isset($_SESSION['adminName'])) {
     header("Location: /unauthorized.php");
     exit;
 }
-
+include 'db_connect.php';
 ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -51,7 +51,6 @@ if (!isset($_SESSION['adminName'])) {
                 <label class="form-label" for="department">Department</label>
                 <select class="form-select" required name="department">
                     <?php
-                    include 'db_connect.php';
                     $sql = 'select id from departments';
                     $res = mysqli_query($connection, $sql);
                     while ($row = mysqli_fetch_array($res)) {
@@ -77,7 +76,7 @@ if (!isset($_SESSION['adminName'])) {
     </div>
 
     <?php
-    include 'db_connect.php';
+
     $query = "SELECT * FROM students";
 
     // Execute the query

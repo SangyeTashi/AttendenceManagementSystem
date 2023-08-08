@@ -43,12 +43,21 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </a>
 
         <div>
-            <button type='button' class=" btn btn-light">
-                <a class="link-dark link-underline-opacity-0" href="/login.php">Login</a>
-            </button>
-            <button type='button' class=" btn btn-light">
-                <a class="link-dark link-underline-opacity-0" href="/staffLogin.php">Login as Staff</a>
-            </button>
+            <a class="link-dark link-underline-opacity-0" href="/login.php">
+                <button type='button' class=" btn btn-light">
+                    Student Login
+                </button>
+            </a>
+            <a class="link-dark link-underline-opacity-0" href="/staffLogin.php">
+                <button type='button' class=" btn btn-light">
+                    Login Staff
+                </button>
+            </a>
+            <a class="link-dark link-underline-opacity-0" href="/adminLogin.php">
+                <button type='button' class=" btn btn-light">
+                    Login Admin
+                </button>
+            </a>
         </div>
     </div>
 </nav>

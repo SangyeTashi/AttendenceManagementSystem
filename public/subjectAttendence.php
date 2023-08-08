@@ -50,9 +50,9 @@ $semester = $_GET['semester'];
     }
     ?>
     <div style="margin-top:8rem"></div>
-    <div style="max-width: 400px;margin: 0 auto; display:flex;flex-direction: column;"
+    <div style="max-width:500px;margin: 0 auto; display:flex;flex-direction: column;"
         action="doRecordAttendence.php?subjectId=<?php echo $subject ?> ">
-        <table>
+        <table class="table">
             <tr>
                 <th>Student Name</th>
                 <th>Present</th>
@@ -74,12 +74,10 @@ $semester = $_GET['semester'];
                     <td>
                         <?php echo $row['absent_count'] ?>
                     </td>
-                    <td></td>
                     <td>
                         <?php $percentage = $row['present_count'] / ($row['present_count'] + $row['absent_count']) * 100;
                         echo number_format($percentage, 1) ?>
                     </td>
-                    <td></td>
                 </tr>
 
             <?php } ?>
