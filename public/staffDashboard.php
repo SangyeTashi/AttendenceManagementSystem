@@ -18,9 +18,9 @@ try {
 
 
 
-    $qry_announcement_admin = "SELECT admins.id as adminName,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.id = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone' OR announcements.written_to = 'staffs'";
+    $qry_announcement_admin = "SELECT admins.id as adminName,announcements.id,announcements.title,announcements.date,announcements.content FROM admins JOIN announcements ON admins.id = announcements.writerId WHERE announcements.writer='admins' AND announcements.written_to='$department' OR announcements.written_to = 'everyone' OR announcements.written_to = 'staff'";
 
-    $qry_announcement_staff = "SELECT staffs.name,announcements.id,announcements.title,announcements.date,announcements.content FROM staffs JOIN announcements ON staffs.id = announcements.writerId WHERE announcements.writer='staffs' AND announcements.written_to='$department' OR announcements.written_to = 'everyone' OR announcements.written_to = 'staffs'";
+    $qry_announcement_staff = "SELECT staffs.name,announcements.id,announcements.title,announcements.date,announcements.content FROM staffs JOIN announcements ON staffs.id = announcements.writerId WHERE announcements.writer='staffs' AND announcements.written_to='$department' OR announcements.written_to = 'everyone' OR announcements.written_to = 'staff'";
 
     $announcements_admin = mysqli_query($connection, $qry_announcement_admin);
 
@@ -137,6 +137,8 @@ try {
             padding: 2rem 2rem;
             border-radius: 2rem;
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .announcement {
@@ -255,10 +257,13 @@ try {
                     </div>
                 </div>
             <?php } ?>
+            <a href="createAnnouncement.php">
+                <button class="btn btn-primary" style="align-self: flex-end;">Make an Announcement</button>
+            </a>
         </div>
     </div>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src=" ../js/bootstrap.bundle.min.js"></script>
 
 </body>
 
